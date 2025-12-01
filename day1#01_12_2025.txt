@@ -1,0 +1,694 @@
+- Intro to Information Security:
+--------
+> Ethical hacking & Cyber Security
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+We must understand terms:
+
+1. Information Security[ InfoSec ]:
+````````````````````````
+-> What is Information: [Differ b/w Info & Data]
+> Meaningful form of data
+> Can be called as processed data
+> Data has no context, info does
+eg:
+> Computer is data
+> This is my computer is information
+
+
+
+
+
+
+NOTE: Information in digital systems makes cyber security [Information involving cyber space].
++_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2. Information Security Threats:
+--------------------------------
+> Threat is a constant danger to an asset
+> It can be a person, object or an event
+> Threat can be categorized and ranked
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Type of Threats :
+
+1. Inadvertent Threat	[ Human Failure ]
+2. Physical Threat 	[ Natural disasters ]
+3. Technical Failure	[ Hardware / Software ]
+4. Deliberate acts	[ Hacking / Espionage ]
++_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3. Introduction to Cyber Security:
+----------------------------------
+> Information Security does not deal with?
+
+	- Cyber Warfare		[Govt Web Hacks, DDOS, etc.]
+	- Information Warfare	[Intel]
+	- Negative Impact of people on Internet ( sexual abuse, cyber stalking, etc. )
+	- IoT Security
+
+Then who deal with them?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+> Cyber Security:
+	- Protection of Cyber Space against Cyber Threats and Cyber Space vulnerabilities.
+	- Any threats to Information via Cyber Space
+	- Deal with Deliberate acts
+	- Doesn't deal with physical and personal security
+	- Threats via Cyber Space, not threats for Cyber Space.
+
+
+
+
+
+
+> Objective of Cyber Security:
+	- Confidentiality	: No telling to unauthorized parties
+	- Integrity		: Completeness and accuracy of data
+	- Availability		: When needed, data is available
+	- Non-repudiation	: I should accept i sent you the message and you should accept you received it.
+	- Authenticity		: You should actually be who you tell you are
++_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
+
+
+
+
+
+
+
+
+
+The CIA Triad:
+--------------
+Triangle of InfoSec: 
+	1. CONFIDENTIALITY
+	2. INTEGRITY
+	3. AVAILABILITY
+ 
+CONFIDENTIALITY:
+----------------
+- Roughly but wider than privacy
+- Sensitive Data should not reach wrong people
+- Sensitive Data should reach right people
+~ Measures: 
+	^ Data encryption
+	^ Authentication ( maybe MFA/2FA )
+	^ More sensitive, more physical
+
+INTEGRITY:
+----------
+- Data should be consistent, trustworthy and accurate
+- Data must not change in transit
+- More complex to implement
+~ Measures:
+	^ Backups
+	^ Cryptographic measures (checksums)
+	^ Access Control
+
+AVAILABILITY:
+-------------
+- Data should be available as and when needed
+- Updated softwares and hardwares
+- Adequate system capacity and bandwidth
+~ Measures:
+	^ Firewall rules/policies
+	^ Patch management and disaster recovery
+	^ Load balancers [ CDNs, Cloudflare, AkamaiGhost ....nginx ]
++_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
+
+What is Hacking?
+----------------
+- There are no standard definition of hacking
+- Media continues to add false information about hacking
+- There are good hackers, and there are bad
++_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Information Warfare:
+--------------------
+- "Tactical and strategic use of information, to gain advantage."
+- In earlier days, information was more physical, Groups of people involved, especially   Government, to tackle enimies.
+- Country spend millions in secret intelligence and spies
+- Military used weapons and army power to send policy implementations
++_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Terminologies:
+--------------
+- Vulnerability		: A weakness that can be exploited
+- Threat		: One who exploits a vuln
+- Risk			: Damage caused by exploiting vuln
+- Asset			: Which needs to be accessed after exploitation
+- Bug			: Error, fault or flaw in a computer program that may cause unexpected behaviour
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Professional Terms:
+-------------------
+- InfoSec		
+``````````
++ Information Security / Cyber Security / Data Security
+
+
+- Penetration Testing
+``````````````````````
++ Testing and reporting the security loopholes
+
+
+
+- Vulnerability Assessment 	
+```````````````````````````
++ Testing and reporting the security loopholes, and tell how to fix them
+
+
+- Cyber Espionage
+``````````````````
++ Spying on someone to gain illict access to confidential information
+
+
+
+- Exploits [ Break into security ] 
+```````````
++ Designed to cause unexpected behaviours that an attacker can take advantage of to perform harmful actions 
+
+
+- Zero-day Exploits
+`````````````````````
++ Vulnerabilities not known to professionals only to be exploited by hackers
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+What is Penetration Testing:
+````````````````````````````
+[Penetration Testing, Ethical Hacking, Security Audit] is a process to find [Vulnerability, loophole, weakness] in a [system, network, application etc]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Security Assessment:
+````````````````````
+Every org uses different types of security assessments to validate the level of security on its network, infra etc...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Security Audit:
+````````````````
+- Examining your threat history
+- Checking security trends
+- Perform a Risk/Probability calculation [ Risk = Probability x Harm ]
+- Control risk
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Vulnerability Assessment:
+`````````````````````````
+- Network Scanning 
+- Web Scanning 
+- Scanning tools
+- Security Mistakes
+- many more . . .
