@@ -1,0 +1,129 @@
+Advanced NMAP Scans:
+
+NULL Scan (-sN):
+````````````````
+Sends a TCP packet with no flags set. RFC 793 standard states that if a port is closed, it should respond with an RST packet. If it's open, it should ignore the packet.
+
+# From Attacker-Kali (192.168.56.10)
+nmap -sN -p 20-25 192.168.56.20
+
+XMAS Scan (-sX):
+````````````````
+Sends a TCP packet with the FIN, PSH, and URG flags set. The logic is the same as the NULL scan: open ports ignore the packet, closed ports respond with RST.
+
+# From Attacker-Kali (192.168.56.10)
+nmap -sX -p 20-25 192.168.56.20
+
+
+
+
+
+
+
+Source Port Manipulation (-g):
+````````````````````````````````
+To use a common source port (like port 53 for DNS or port 80 for HTTP) to bypass stateless firewalls that trust traffic originating from these ports.
+
+Some simple firewalls are configured to allow any traffic coming from a specific port, assuming it's part of a legitimate, established connection (e.g., a DNS reply). The -g (or --source-port) flag in Nmap lets you specify the source port for your scan.
+
+example:
+nmap -sS -p 21,22,23,25,53,80,139,445,995 -g 53 192.168.56.20
+
+Wireshark Analysis: Run a Wireshark capture on your Kali interface (eth0 or similar) during the second scan. Apply the filter tcp.port == 53. You should see that your scan packets are originating from port 53 on your machine.
+
+
+
+Decoy Scanning (-D):
+`````````````````````
+To make it difficult for the target's intrusion detection system (IDS) to determine the true source IP address of a scan.
+
+The -D (or --decoy) flag allows you to specify one or more IP addresses to be used as "decoys." Nmap will send packets from these decoy IPs as well as your own. To the target, the scan appears to be coming from multiple sources simultaneously. Your real IP is randomly placed among the decoys by default.
+
+example:
+Perform a scan using the Zombie and FTP server as decoys. The ME keyword tells Nmap where to place your real IP. RND:10 adds 10 random IPs.
+
+# From Attacker-Kali (192.168.56.10)
+# nmap -sS -p 22,80 -D 192.168.56.30,192.168.56.40,x.x.x.x 192.168.56.20
+
+OR
+
+# nmap -sS -p 22,80 -D ME,RND:10 192.168.56.20
+
+OR
+
+# nmap -sS -D RND:10 -p 21,22,80,111 192.168.56.101
+
+
+Idle/Zombie Scan (-sI): PASSIVE SCAN:
+````````````````````````
+
+Use a "zombie" host to scan indirectly, making it appear as if the zombie is scanning the target (your IP is hidden).
+
+# From Attacker-Kali (192.168.56.10)
+# Command: nmap -sI <zombie_ip> <target_ip>
+nmap -sI 192.168.56.30 192.168.56.20
+
+
+
+
+
+
+Overt vs. Covert Methodologies:
+````````````````````````````````
+[+] Overt Scanning: Prioritizes speed and information gathering. This approach is loud, easily detected by Intrusion Detection Systems (IDS), and is typically used when you have explicit permission and want to map a network quickly (e.g., during an authorized internal penetration test).
+
+1) Enable service/version detection (-sV), OS detection (-O), and default script scanning (-sC) to get a complete picture in one go.
+2) Coverage: Scan all 65,535 TCP ports (-p 0-65535) to ensure nothing is missed.
+
+# From Attacker-Kali (192.168.56.10)
+nmap -p0-65535 -sS -sV -O -sC --reason 192.168.56.20
+
+-p0-65535 	: Scan all TCP ports.
+-sS		: A fast SYN scan.
+-sV		: Probe open ports to determine service/version info.
+-O		: Enable OS detection.
+-sC		: Run default safe scripts.
+--reason	: Shows why Nmap concluded a port is open/closed.
+
+
+
+
+
+
+
+[+] Covert Scanning: Prioritizes stealth and evasion. This approach is slow, methodical, and designed to bypass or confuse security controls. It is used in red team exercises or when you need to remain undetected.
+
+
+a) Ultimate Stealth: Use the Idle Scan (-sI) to ensure zero packets are sent from your IP to the target.
+b) Obfuscation: Use decoys (-D) and source port manipulation (-g) to confuse any logs that are generated.
+c) Verification: Use different scan types (NULL, XMAS) to cross-validate findings from different angles.
+
+
+
+
+
+
+
+
+
+
+
+
+
+# nmap -sSVC -p- --source-port 53 --min-parallelism 10 --min-hostgroup 10 --max-hostgroup 20 --max-retries 2 --max-scan-delay 5 target_range
+
+
+--min-parallelism 10  	: 10 Parallel tasks
+--max-retries 2		: Number of Retry Probing Ports
+--max-scan-delay 5	: Delay between each scan
+--min-hostgroup 10 --max-hostgroup 20		: Scan min 10 and max 20 hosts at one time
+_______________________________
+
+
+
+
+
+
+
+All:
+# nmap -sN -g 53 -D RND:5 -p 21,22,80,111 --reason 192.168.56.101
